@@ -22,14 +22,13 @@ class Test_Registrationpage():
         driver = webdriver.Chrome()
         driver.get("https://cdpn.io/AbdullahSajjad/fullpage/LYGVRgK?anon=true&view=fullpage")
         driver.maximize_window()
-        time.sleep(5)
+
         assert driver.current_url == "https://cdpn.io/AbdullahSajjad/fullpage/LYGVRgK?anon=true&view=fullpage"
         allure.attach(driver.get_screenshot_as_png(), name='CDPEN_Home_Page_Screenshot',
                       attachment_type=AttachmentType.PNG)
 
         driver.switch_to.frame(driver.find_element(By.ID, "result"))
         driver.find_element(By.XPATH, "//button[text()='Submit']").click()
-        time.sleep(5)
 
         allure.attach(driver.get_screenshot_as_png(), name='CDPEN_Registration_Page01_Screenshot',
                       attachment_type=AttachmentType.PNG)
@@ -44,9 +43,9 @@ class Test_Registrationpage():
             assert True, "Enter All Mandatory fields"
         else:
             assert False
-        email = Generate_Email()
+
         password = random_password()
-        driver.find_element(By.XPATH, "//input[@id='email']").send_keys(email)
+        driver.find_element(By.XPATH, "//input[@id='email']").send_keys(Generate_Email())
         driver.find_element(By.XPATH, "//input[@id='password']").send_keys(password)
         driver.find_element(By.XPATH, "//input[@id='password2']").send_keys(password)
 
@@ -60,7 +59,7 @@ class Test_Registrationpage():
 
 
 def Generate_Email():
-    username = ''.join(random.choices(string.ascii_lowercase, k=4))  # rondam 4 char lower case e.g gfhd
+    username = ''.join(random.choices(string.ascii_lowercase, k=4))  # random 4 char lower case e.g gfhd
     domain = random.choice(['gmail.com', 'ymail.com', 'outlook.com'])  #
     return f"{username}@{domain}"  # random 4 char + domain
 

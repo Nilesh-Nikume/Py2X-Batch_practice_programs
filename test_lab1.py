@@ -39,6 +39,6 @@ class Test_loginpage():
             x = text.replace("$", "").strip()
             prize.append(x)
         prize.sort()
-        print(f"Product having: {prize[1]}")
+        print(f"Product having lowest prize is : {prize[1]}")
 
         driver.quit()
